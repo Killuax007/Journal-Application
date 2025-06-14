@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
+@CrossOrigin(origins = "http://localhost:5173/")
 public class AdminController {
     @Autowired
     private UserServices userServices;

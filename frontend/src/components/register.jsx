@@ -52,8 +52,11 @@ export default function Register() {
 
   return (
     <div className="w-full max-w-xl mx-auto   ">
-      <div className="flex justify-center items-center h-screen bg-[#0A0A0A] ">
+      <div className="flex justify-center items-center h-[80vh] bg-[#0A0A0A] ">
         <div className="  p-4 rounded-lg w-full max-w-md">
+          <h2 className="text-3xl font-sans font-medium text-center my-4">
+            Joined as a Member
+          </h2>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="mb-5">
               <label
@@ -67,7 +70,7 @@ export default function Register() {
                 id="username"
                 name="userName"
                 required
-                className="border dark:focus:ring-gray-700 dark:focus:border-gray-800 text-gray-900  rounded-md text-sm  block w-full py-1.5 px-2  dark:bg-neutral-800/50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
+                className="border font-medium dark:focus:ring-gray-700 dark:focus:border-gray-800 text-gray-900  rounded-md text-sm  block w-full py-1.5 px-2  dark:bg-neutral-800/50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
                 placeholder="John doe"
                 value={formdata.userName}
                 onChange={handleOnChange}
@@ -84,7 +87,7 @@ export default function Register() {
                 type="email"
                 id="email"
                 name="email"
-                className="border dark:focus:ring-gray-700 dark:focus:border-gray-800 text-gray-900  rounded-md text-sm  block w-full py-1.5 px-2  dark:bg-neutral-800/50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
+                className="border font-medium dark:focus:ring-gray-700 dark:focus:border-gray-800 text-gray-900  rounded-md text-sm  block w-full py-1.5 px-2  dark:bg-neutral-800/50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
                 placeholder="Johndoe@mail.com"
                 value={formdata.email}
                 onChange={handleOnChange}
@@ -102,7 +105,7 @@ export default function Register() {
                 type="password"
                 id="password"
                 name="password"
-                className=" border dark:focus:ring-gray-700 dark:focus:border-gray-800 text-gray-900  rounded-md text-sm  block w-full py-1.5 px-2  dark:bg-neutral-800/50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
+                className=" border font-medium dark:focus:ring-gray-700 dark:focus:border-gray-800 text-gray-900  rounded-md text-sm  block w-full py-1.5 px-2  dark:bg-neutral-800/50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
                 placeholder="******"
                 required
                 value={formdata.password}

@@ -3,7 +3,6 @@ package com.auth.backend.Services;
 import com.auth.backend.Entity.JournalEntry;
 import com.auth.backend.Entity.UserEntry;
 import com.auth.backend.Repo.JournalRepo;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -41,11 +40,11 @@ public class JournalEntryServices {
         return journalRepo.findAll();
     }
 
-    public Optional<JournalEntry> getJournalById(ObjectId id) {
+    public Optional<JournalEntry> getJournalById(String id) {
         return journalRepo.findById(id);
     }
 
-    public void deleteJournalEntry(ObjectId id, String username) {
+    public void deleteJournalEntry(String id, String username) {
         UserEntry user = userServices.findByUserName(username);
         user.getJournalEntries().removeIf(x -> x.getId().equals(id));
         userServices.saveUser(user);

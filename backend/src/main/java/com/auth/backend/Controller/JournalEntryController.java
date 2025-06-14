@@ -4,7 +4,6 @@ import com.auth.backend.Entity.JournalEntry;
 import com.auth.backend.Entity.UserEntry;
 import com.auth.backend.Services.JournalEntryServices;
 import com.auth.backend.Services.UserServices;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +42,7 @@ public class JournalEntryController {
 
     //    TODO The flaw is here that an un-authenticated user can see others journals by simple enter the respective Journal entry id
     @GetMapping("/id/{journal_Id}")
-    public ResponseEntity<JournalEntry> getJournalEntryById(@PathVariable ObjectId journal_Id) {
+    public ResponseEntity<JournalEntry> getJournalEntryById(@PathVariable String journal_Id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
         UserEntry user = userServices.findByUserName(userName);
@@ -70,7 +69,7 @@ public class JournalEntryController {
     }
 
     @PutMapping("/id/{journal_Id}")
-    public ResponseEntity<JournalEntry> updateJournalEntry(@RequestBody JournalEntry newEntry, @PathVariable ObjectId journal_Id) {
+    public ResponseEntity<JournalEntry> updateJournalEntry(@RequestBody JournalEntry newEntry, @PathVariable String journal_Id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
         UserEntry user = userServices.findByUserName(userName);
@@ -90,7 +89,7 @@ public class JournalEntryController {
     }
 
     @DeleteMapping("/id/{journal_Id}")
-    public String deleteJournalEntry(@PathVariable ObjectId journal_Id) {
+    public String deleteJournalEntry(@PathVariable String journal_Id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
         journalEntryServices.deleteJournalEntry(journal_Id, userName);
