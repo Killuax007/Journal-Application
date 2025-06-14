@@ -83,11 +83,20 @@ This project features a custom JWT-based authentication system:
 
 ---
 
-## 📌 How to Run
+
+## 🧪 Clone & Run Locally
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/Killuax007/Journal-Application.git
+cd Journal-Application
+```
 
 ### Backend
 ```bash
 cd backend
+./mvnw clean install
 ./mvnw spring-boot:run
 ```
 
@@ -104,6 +113,19 @@ npm run dev
 - **🔁 No refresh needed after create/delete/update**
 - **⚛️ Custom global context for user and journals**
 - **⚙️ Clean and scalable code architecture**
+
+---
+
+## ✍️ Author
+Manoj Kumar Panda
+Full-Stack Developer | Spring Boot + React Enthusiast
+🚀 Building developer-centric apps with love ❤️
+
+---
+
+## 🌟 Like this project?
+### Star it on GitHub ⭐ and share it with your dev friends!
+
 
 
 
