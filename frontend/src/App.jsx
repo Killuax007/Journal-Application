@@ -8,7 +8,7 @@ import Navbar from "./components/navbar";
 import ProtectedRoute from "./components/protect-route";
 import AddJournal from "./components/add-journal";
 import UpdateJournal from "./components/update-journal";
-import { Delete } from "lucide-react";
+
 import DeleteJournal from "./components/delete-journal";
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route index path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/otp-verification" element={<Otpverification />} />
         <Route
           path="/dashboard"
           element={

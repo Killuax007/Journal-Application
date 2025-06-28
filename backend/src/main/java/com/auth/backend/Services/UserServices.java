@@ -53,6 +53,11 @@ public class UserServices {
         return userRepo.findById(id);
     }
 
+    public Optional<UserEntry> otpVerification(String otp) {
+        Optional<UserEntry> userOptional = userRepo.findByOtp(otp.trim());
+        return userOptional;
+    }
+
     public void deleteById(ObjectId id) {
         userRepo.deleteById(id);
     }

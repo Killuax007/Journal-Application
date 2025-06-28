@@ -43,7 +43,7 @@ export default function Register() {
         password: "",
       });
       setSubmit(false);
-      router("/login");
+      router("/otp-verification");
     } catch (error) {
       console.log(error);
       setSubmit(false);

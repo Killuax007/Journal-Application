@@ -2,9 +2,12 @@ package com.auth.backend.Controller;
 
 
 import com.auth.backend.Entity.UserEntry;
+import com.auth.backend.Services.EmailService;
+import com.auth.backend.Services.OtpService;
 import com.auth.backend.Services.UserDetailsServiceImpl;
 import com.auth.backend.Services.UserServices;
 import com.auth.backend.Utils.JwtUtil;
+import com.auth.backend.io.OtpRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +16,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -27,9 +32,15 @@ public class PublicController {
     private UserServices userServices;
     @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
+    private EmailService emailService;
+    @Autowired
+    private OtpService otpService;
+
 
     @GetMapping("")
     public ResponseEntity<String> displayIntro() {
+
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Welcome my friend...");
     }
 
@@ -39,8 +50,31 @@ public class PublicController {
         if (userEntry == null) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create ");
         }
+        String otp = otpService.generateOtp();
+        userEntry.setOtp(otp);
+        emailService.sentMail(userEntry.getEmail(), "Account Verification One Time Password ", otp);
         userServices.saveNewUser(userEntry);
         return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
+
+    }
+
+    @PostMapping("/otp-verify")
+    public ResponseEntity<String> verifyUserEmail(@RequestBody OtpRequest otpRequest) {
+        String otp = otpRequest.getOtp();
+        System.out.println(otp);
+        if (otp == null) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Invalid otp ");
+        }
+        Optional<UserEntry> userOpt = userServices.otpVerification(otp);
+        if (userOpt.isPresent()) {
+            UserEntry user = userOpt.get();
+            user.setIsEmailVerified(true);
+            user.setOtp(null);  // Optional: Clear OTP
+            userServices.saveUser(user);
+            return ResponseEntity.ok("Account verified successfully!");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid or expired OTP");
+        }
 
     }
 

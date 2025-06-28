@@ -28,6 +28,8 @@ public class UserEntry {
     @NonNull
     private String password;
     private List<String> roles;
+    private String otp;
+    private Boolean isEmailVerified = false;
     @DBRef
     private List<JournalEntry> journalEntries = new ArrayList<>();
 }
